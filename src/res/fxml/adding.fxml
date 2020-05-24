@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.Adding"
+      prefHeight="400.0" prefWidth="600.0">
+
+    <TextArea fx:id="questionTextField" minHeight="200"/>
+    <TextArea fx:id="answerTextField" minHeight="200"/>
+    <HBox>
+        <ComboBox fx:id="levelBox"/>
+        <ComboBox fx:id="sectionBox"/>
+        <Button text="Add section" onMouseClicked="#addSectionButtonListener"/>
+        <DatePicker fx:id="datePicker"/>
+    </HBox>
+
+    <Button fx:id="addButton" text="Add" onMouseClicked="#addButtonListener"/>
+
+
+</VBox>

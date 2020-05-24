@@ -1,0 +1,33 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.Button?>
+<BorderPane fx:controller="controller.Main"
+            xmlns:fx="http://javafx.com/fxml">
+
+    <top>
+        <Button text="add QA" onMouseClicked="#addButtonListener"/>
+    </top>
+
+    <bottom>
+        <Pane prefHeight="50"/>
+    </bottom>
+
+    <left>
+        <Pane prefWidth="30"/>
+    </left>
+
+    <right>
+        <Pane prefWidth="30"/>
+    </right>
+
+    <center>
+        <ScrollPane>
+            <GridPane fx:id="gridPane" alignment="center" hgap="10" vgap="10">
+
+            </GridPane>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
