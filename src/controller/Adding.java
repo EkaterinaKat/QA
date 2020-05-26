@@ -4,15 +4,14 @@ import database.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import utils.WindowCreator;
 
 import java.time.LocalDate;
 
 public class Adding {
+    @FXML
+    private TextField imageTextField;
     @FXML
     private Button addButton;
     @FXML
@@ -60,7 +59,8 @@ public class Adding {
         int level = levelBox.getValue();
         String section = sectionBox.getValue();
         LocalDate date = datePicker.getValue();
-        JDBC.getInstance().addQA(question, answer, level, section, date);
+        String image = imageTextField.getText();
+        JDBC.getInstance().addQA(question, answer, level, section, date, image);
         Catalogue.getInstance().updateCatalogue();
         clear();
     }

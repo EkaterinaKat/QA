@@ -3,6 +3,7 @@ package controller;
 import database.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utils.WindowCreator;
@@ -34,5 +35,9 @@ public class Main extends Application {
     @FXML
     private void addButtonListener() {
         Adding.addQA();
+    }
+
+    public void learn12ButtonListener() {
+        Learn12.learn();
     }
 }

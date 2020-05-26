@@ -1,26 +1,22 @@
 package model;
 
-import java.util.Date;
-
 public class QA {
     private int id;
     private String question;
     private String answer;
     private int level;
     private String section;
-    private int day;
-    private int month;
-    private int year;
+    private String date;
+    private String image;
 
-    public QA(int id, String question, String answer, int level, String section, int day, int month, int year) {
+    public QA(int id, String question, String answer, int level, String section, String date, String image) {
         this.id = id;
         this.question = question;
         this.answer = answer;
         this.level = level;
         this.section = section;
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        this.date = date;
+        this.image = image;
     }
 
     public int getId() {
@@ -43,15 +39,11 @@ public class QA {
         return section;
     }
 
-    public int getDay() {
-        return day;
+    public String getImage() {
+        return image;
     }
 
-    public int getMonth() {
-        return month;
-    }
-
-    public int getYear() {
-        return year;
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -3,11 +3,14 @@ package controller;
 import database.JDBC;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import model.QA;
 import utils.WindowCreator;
 
 public class ShowQA {
     private static QA qa;
+    @FXML
+    private ImageView imageView;
     @FXML
     private Label questionLabel;
     @FXML
@@ -20,7 +23,7 @@ public class ShowQA {
     private Label dateLabel;
 
     static void show(String question){
-        qa = JDBC.getInstance().getQA(question);
+        qa = JDBC.getInstance().getQAbyQuestion(question);
         WindowCreator.getInstance().createShowWindow();
     }
 
@@ -33,4 +36,8 @@ public class ShowQA {
         dateLabel.setText(String.format("%d.%d.%d", qa.getDay(), qa.getMonth(), qa.getYear()));
     }
 
+    @FXML
+    private void editButtonListener() {
+
+    }
 }

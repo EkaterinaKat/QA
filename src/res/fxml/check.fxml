@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.Check">
+
+
+    <center>
+        <ScrollPane>
+            <GridPane fx:id="table"/>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <Button text="OK" onMouseClicked="#okButtonListener"/>
+    </bottom>
+
+</BorderPane>

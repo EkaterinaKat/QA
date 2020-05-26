@@ -2,15 +2,28 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Button?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.ShowQA"
       prefHeight="400.0" prefWidth="600.0">
 
-    <Label fx:id="questionLabel"/>
-    <Label fx:id="answerLabel"/>
+    <Button text="Edit" onMouseClicked="#editButtonListener"/>
+    <Pane prefHeight="30"/>
+    <Label fx:id="questionLabel" wrapText="true"/>
+    <Pane prefHeight="30"/>
+    <ScrollPane>
+        <Label fx:id="answerLabel" wrapText="true"/>
+        <ImageView fx:id="imageView"/>
+    </ScrollPane>
+    <Pane prefHeight="30"/>
     <Label fx:id="levelLabel"/>
+    <Pane prefHeight="30"/>
     <Label fx:id="sectionLabel"/>
+    <Pane prefHeight="30"/>
     <Label fx:id="dateLabel"/>
 
 </VBox>

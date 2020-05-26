@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.Adding"
+      fx:controller="controller."
       prefHeight="400.0" prefWidth="600.0">
 
     <TextArea fx:id="questionTextField" minHeight="200" wrapText="true"/>

@@ -36,13 +36,11 @@ public class JDBC {
                 "    answer   TEXT,\n" +
                 "    level    INTEGER,\n" +
                 "    section  STRING,\n" +
-                "    day      INT,\n" +
-                "    month    INT,\n" +
-                "    year     INT\n" +
+                "    date     STRING,\n" +
+                "    image    STRING\n" +
                 ");";
         executeUpdate(query);
     }
-
 
     private void executeUpdate(String query) {
         try {
@@ -113,14 +111,11 @@ public class JDBC {
         return result;
     }
 
-    public void addQA(String question, String answer, int level, String section, LocalDate date) {
-        int day = date.getDayOfMonth();
-        int month = date.getMonthValue();
-        int year = date.getYear();
+    public void addQA(String question, String answer, int level, String section, LocalDate date, String image) {
         String query = String.format(
-                "INSERT INTO qa (question, answer, level, section, day, month, year)\n" +
-                        "VALUES (\"%s\", \"%s\", \"%d\", \"%s\", \"%d\", \"%d\", \"%d\")",
-                question, answer, level, section, day, month, year);
+                "INSERT INTO qa (question, answer, level, section, date, image)\n" +
+                        "VALUES (\"%s\", \"%s\", \"%d\", \"%s\", \"%s\", \"%s\")",
+                question, answer, level, section, date.toString(), image);
         executeUpdate(query);
     }
 
@@ -139,9 +134,9 @@ public class JDBC {
         return result;
     }
 
-    public QA getQA(String question) {
+    public QA getQAbyQuestion(String question) {
         QA qa = null;
-        String query = String.format("SELECT id, answer, level, section, day, month, year FROM qa\n" +
+        String query = String.format("SELECT id, answer, level, section, date, image FROM qa\n" +
                 "WHERE question = \"%s\"", question);
         try {
             ResultSet resultSet = statement.executeQuery(query);
@@ -151,13 +146,33 @@ public class JDBC {
             String answer = resultSet.getString(2);
             int level = resultSet.getInt(3);
             String section = resultSet.getString(4);
-            int day = resultSet.getInt(5);
-            int month = resultSet.getInt(6);
-            int year = resultSet.getInt(7);
-            qa = new QA(id, question, answer, level, section, day, month, year);
+            String date = resultSet.getString(5);
+            String image = resultSet.getString(6);
+            qa = new QA(id, question, answer, level, section, date, image);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return qa;
+    }
+
+    public List<QA> getQAlevel1(){
+        List<QA> list = new ArrayList<>();
+        String query = "SELECT id, question, answer, section, date, image FROM qa\n" +
+                "WHERE level = 1";
+        try {
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()){
+                int id = resultSet.getInt(1);
+                String question = resultSet.getString(2);
+                String answer = resultSet.getString(3);
+                String section = resultSet.getString(4);
+                String date = resultSet.getString(5);
+                String image = resultSet.getString(6);
+                list.add(new QA(id, question, answer, 1, section, date, image));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }

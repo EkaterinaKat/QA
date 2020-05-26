@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Button?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.Learn12">
+
+
+    <center>
+        <TableView fx:id="table">
+            <columns>
+                <TableColumn prefWidth="60" text="№" fx:id="countColumn"/>
+                <TableColumn prefWidth="90" fx:id="checkBoxColumn"/>
+                <TableColumn prefWidth="700" text="question" fx:id="questionColumn" />
+            </columns>
+        </TableView>
+    </center>
+
+    <bottom>
+        <Button text="check" onMouseClicked="#checkButtonListener"/>
+    </bottom>
+
+
+</BorderPane>

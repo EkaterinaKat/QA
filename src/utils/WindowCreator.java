@@ -38,6 +38,14 @@ public class WindowCreator {
         createModalWindow("show.fxml", SHOW_WIDTH, SHOW_HEIGHT);
     }
 
+    public void createLearn12Window(){
+        createModalWindow("learn12.fxml", MAIN_WIDTH, MAIN_HEIGHT);
+    }
+
+    public void createCheckWindow(){
+        createModalWindow("check.fxml", MAIN_WIDTH, MAIN_HEIGHT);
+    }
+
     private void createModalWindow(String fxmlName, int width, int height) {
         Stage stage = getStage(fxmlName, width, height);
         stage.initModality(Modality.APPLICATION_MODAL);
