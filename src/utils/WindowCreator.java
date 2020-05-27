@@ -30,19 +30,23 @@ public class WindowCreator {
         createModalWindow("adding.fxml", ADDING_WIDTH, ADDING_HEIGHT);
     }
 
-    public void createAddingSectionWindow(){
+    public void createEditWindow() {
+        createModalWindow("edit.fxml", ADDING_WIDTH, ADDING_HEIGHT);
+    }
+
+    public void createAddingSectionWindow() {
         createModalWindow("adding_section.fxml", ADDING_SECTION_WIDTH, ADDING_SECTION_HEIGHT);
     }
 
-    public void createShowWindow(){
+    public void createShowWindow() {
         createModalWindow("show.fxml", SHOW_WIDTH, SHOW_HEIGHT);
     }
 
-    public void createLearn12Window(){
+    public void createLearn12Window() {
         createModalWindow("learn12.fxml", MAIN_WIDTH, MAIN_HEIGHT);
     }
 
-    public void createCheckWindow(){
+    public void createCheckWindow() {
         createModalWindow("check.fxml", MAIN_WIDTH, MAIN_HEIGHT);
     }
 

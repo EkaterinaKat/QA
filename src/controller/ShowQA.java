@@ -3,9 +3,12 @@ package controller;
 import database.JDBC;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.QA;
 import utils.WindowCreator;
+
+import static utils.Constants.IMAGES_PATH;
 
 public class ShowQA {
     private static QA qa;
@@ -22,22 +25,25 @@ public class ShowQA {
     @FXML
     private Label dateLabel;
 
-    static void show(String question){
+    static void show(String question) {
         qa = JDBC.getInstance().getQAbyQuestion(question);
         WindowCreator.getInstance().createShowWindow();
     }
 
     @FXML
-    private void initialize(){
+    private void initialize() {
         questionLabel.setText(qa.getQuestion());
         answerLabel.setText(qa.getAnswer());
-        sectionLabel.setText("Section: "+qa.getSection());
-        levelLabel.setText("Level: "+qa.getLevel());
-        dateLabel.setText(String.format("%d.%d.%d", qa.getDay(), qa.getMonth(), qa.getYear()));
+        sectionLabel.setText("Section: " + qa.getSection());
+        levelLabel.setText("Level: " + qa.getLevel());
+        dateLabel.setText(qa.getDate());
+        if (!qa.getImage().equals("")) {
+            imageView.setImage(new Image(IMAGES_PATH + qa.getImage()));
+        }
     }
 
     @FXML
     private void editButtonListener() {
-
+        Edit.editQA(qa);
     }
 }

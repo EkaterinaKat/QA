@@ -155,13 +155,13 @@ public class JDBC {
         return qa;
     }
 
-    public List<QA> getQAlevel1(){
+    public List<QA> getQAlevel1() {
         List<QA> list = new ArrayList<>();
         String query = "SELECT id, question, answer, section, date, image FROM qa\n" +
                 "WHERE level = 1";
         try {
             ResultSet resultSet = statement.executeQuery(query);
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String question = resultSet.getString(2);
                 String answer = resultSet.getString(3);
@@ -174,5 +174,12 @@ public class JDBC {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public void editQA(QA qa, String newQ, String newA, String newIm) {
+        String query = String.format("UPDATE qa \n" +
+                "\t   SET question = \"%s\", answer = \"%s\", image = \"%s\" \n" +
+                "\t   WHERE id = \"%d\"", newQ, newA, newIm, qa.getId());
+        executeUpdate(query);
     }
 }

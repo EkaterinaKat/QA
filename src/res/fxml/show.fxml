@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.*?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.ShowQA"
-      prefHeight="400.0" prefWidth="600.0">
+      fx:controller="controller.ShowQA">
 
     <Button text="Edit" onMouseClicked="#editButtonListener"/>
-    <Pane prefHeight="30"/>
+    <Pane prefHeight="10"/>
     <Label fx:id="questionLabel" wrapText="true"/>
-    <Pane prefHeight="30"/>
-    <ScrollPane>
-        <Label fx:id="answerLabel" wrapText="true"/>
-        <ImageView fx:id="imageView"/>
+    <Pane prefHeight="10"/>
+
+    <ScrollPane minHeight="700" maxWidth="1000">
+        <VBox>
+            <Label fx:id="answerLabel" wrapText="true" maxWidth="900"/>
+            <Pane prefHeight="15"/>
+            <ImageView fx:id="imageView" fitWidth="900"/>
+        </VBox>
     </ScrollPane>
-    <Pane prefHeight="30"/>
+    <Pane prefHeight="10"/>
     <Label fx:id="levelLabel"/>
-    <Pane prefHeight="30"/>
+    <Pane prefHeight="10"/>
     <Label fx:id="sectionLabel"/>
-    <Pane prefHeight="30"/>
+    <Pane prefHeight="10"/>
     <Label fx:id="dateLabel"/>
 
 </VBox>

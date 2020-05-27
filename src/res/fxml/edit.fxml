@@ -5,22 +5,22 @@
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller."
+      fx:controller="controller.Edit"
       prefHeight="400.0" prefWidth="600.0">
 
     <TextArea fx:id="questionTextField" minHeight="200" wrapText="true"/>
     <TextArea fx:id="answerTextField" minHeight="200" wrapText="true"/>
-    <ComboBox fx:id="levelBox"/>
+    <!--    <ComboBox fx:id="levelBox"/>-->
     <HBox>
-        <ComboBox fx:id="sectionBox"/>
-        <Button text="Add section" onMouseClicked="#addSectionButtonListener"/>
-        <DatePicker fx:id="datePicker"/>
+        <!--        <ComboBox fx:id="sectionBox"/>-->
+        <!--        <Button text="Add section" onMouseClicked="#addSectionButtonListener"/>-->
+        <!--        <DatePicker fx:id="datePicker"/>-->
     </HBox>
     <HBox>
         <Label text="image: "/>
         <TextField fx:id="imageTextField"/>
     </HBox>
-    <Button fx:id="addButton" text="Add" onMouseClicked="#addButtonListener"/>
+    <Button text="Done" onMouseClicked="#doneButtonListener"/>
 
 
 </VBox>

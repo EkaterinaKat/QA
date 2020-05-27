@@ -3,12 +3,14 @@ package controller;
 import database.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utils.WindowCreator;
 
 public class Main extends Application {
+    @FXML
+    private TextField searchField;
     @FXML
     private GridPane gridPane;
 
@@ -30,6 +32,8 @@ public class Main extends Application {
     @FXML
     private void initialize() {
         Catalogue.create(gridPane);
+        searchField.textProperty().addListener((observable, oldValue, newValue) ->
+                Catalogue.getInstance().updateCatalogue(searchField.getText()));
     }
 
     @FXML

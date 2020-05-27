@@ -46,4 +46,8 @@ public class QA {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getDate() {
+        return date;
+    }
 }

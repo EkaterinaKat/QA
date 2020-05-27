@@ -8,14 +8,14 @@ import utils.Utils;
 import utils.WindowCreator;
 
 public class AddingSection {
-    private static Adding adding;
+    private static SectionCreationAware sectionCreationAware;
     @FXML
     private Button okButton;
     @FXML
     private TextField nameInputField;
 
-    static void addSection(Adding adding1){
-        adding = adding1;
+    static void addSection(SectionCreationAware reciver) {
+        sectionCreationAware = reciver;
         WindowCreator.getInstance().createAddingSectionWindow();
     }
 
@@ -33,7 +33,7 @@ public class AddingSection {
     @FXML
     private void okButtonListener() {
         JDBC.getInstance().addSection(nameInputField.getText());
-        adding.tuneSectionBox();
+        sectionCreationAware.notify();
         Utils.closeWindowThatContains(okButton);
     }
 }

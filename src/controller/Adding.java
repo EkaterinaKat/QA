@@ -4,16 +4,17 @@ import database.JDBC;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import utils.WindowCreator;
 
 import java.time.LocalDate;
 
-public class Adding {
+public class Adding implements SectionCreationAware {
     @FXML
     private TextField imageTextField;
-    @FXML
-    private Button addButton;
     @FXML
     private ComboBox<String> sectionBox;
     @FXML
@@ -41,7 +42,7 @@ public class Adding {
         levelBox.setValue(1);
     }
 
-    void tuneSectionBox() {
+    private void tuneSectionBox() {
         ObservableList<String> sections = FXCollections.observableArrayList();
         sections.addAll(JDBC.getInstance().getSections());
         sectionBox.setItems(sections);
@@ -68,5 +69,11 @@ public class Adding {
     private void clear() {
         questionTextField.clear();
         answerTextField.clear();
+        imageTextField.clear();
+    }
+
+    @Override
+    public void inform() {
+        tuneSectionBox();
     }
 }
