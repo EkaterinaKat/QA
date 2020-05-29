@@ -33,7 +33,7 @@ public class AddingSection {
     @FXML
     private void okButtonListener() {
         JDBC.getInstance().addSection(nameInputField.getText());
-        sectionCreationAware.notify();
+        sectionCreationAware.inform();
         Utils.closeWindowThatContains(okButton);
     }
 }

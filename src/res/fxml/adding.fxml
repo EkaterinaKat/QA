@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="controller.Adding"
@@ -15,6 +14,12 @@
         <ComboBox fx:id="sectionBox"/>
         <Button text="Add section" onMouseClicked="#addSectionButtonListener"/>
         <DatePicker fx:id="datePicker"/>
+    </HBox>
+    <HBox>
+        <Button text="Add SubQuestion" onMouseClicked="#addSubQuestionListener"/>
+        <VBox fx:id="subQuestionPane">
+
+        </VBox>
     </HBox>
     <HBox>
         <Label text="image: "/>

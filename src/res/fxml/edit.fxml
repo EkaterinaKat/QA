@@ -10,11 +10,11 @@
 
     <TextArea fx:id="questionTextField" minHeight="200" wrapText="true"/>
     <TextArea fx:id="answerTextField" minHeight="200" wrapText="true"/>
-    <!--    <ComboBox fx:id="levelBox"/>-->
     <HBox>
-        <!--        <ComboBox fx:id="sectionBox"/>-->
-        <!--        <Button text="Add section" onMouseClicked="#addSectionButtonListener"/>-->
-        <!--        <DatePicker fx:id="datePicker"/>-->
+        <Button text="Add SubQuestion" onMouseClicked="#addSubQuestionListener"/>
+        <VBox fx:id="subQuestionPane">
+
+        </VBox>
     </HBox>
     <HBox>
         <Label text="image: "/>

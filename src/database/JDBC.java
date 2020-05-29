@@ -1,6 +1,7 @@
 package database;
 
 import model.QA;
+import model.SubQuestion;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -18,7 +19,18 @@ public class JDBC {
             createSectionsTable();
         if (!tableExists("qa"))
             createQATable();
+        if (!tableExists("subQ"))
+            createSubQTable();
+    }
 
+    private void createSubQTable() {
+        String query = "CREATE TABLE subQ (\n" +
+                "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    question TEXT,\n" +
+                "    level    INTEGER,\n" +
+                "    qa_id    INTEGER\n" +
+                ");";
+        executeUpdate(query);
     }
 
     private void createSectionsTable() {
@@ -111,12 +123,26 @@ public class JDBC {
         return result;
     }
 
-    public void addQA(String question, String answer, int level, String section, LocalDate date, String image) {
+    public Integer addQA(String question, String answer, int level, String section, LocalDate date, String image) {
         String query = String.format(
                 "INSERT INTO qa (question, answer, level, section, date, image)\n" +
                         "VALUES (\"%s\", \"%s\", \"%d\", \"%s\", \"%s\", \"%s\")",
                 question, answer, level, section, date.toString(), image);
         executeUpdate(query);
+        return getLastInsertID();
+    }
+
+    private int getLastInsertID() {
+        int id = 0;
+        String query = "select last_insert_rowid();";
+        try {
+            ResultSet resultSet = statement.executeQuery(query);
+            resultSet.next();
+            id = resultSet.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 
     public List<String> getQuestions() {
@@ -180,6 +206,48 @@ public class JDBC {
         String query = String.format("UPDATE qa \n" +
                 "\t   SET question = \"%s\", answer = \"%s\", image = \"%s\" \n" +
                 "\t   WHERE id = \"%d\"", newQ, newA, newIm, qa.getId());
+        executeUpdate(query);
+    }
+
+    public void createSubQuestion(String question, int level, int qa_id) {
+        String query = String.format(
+                "INSERT INTO subQ (question, level, qa_id)\n" +
+                        "VALUES (\"%s\", \"%d\", \"%d\")",
+                question, level, qa_id);
+        executeUpdate(query);
+    }
+
+    public List<SubQuestion> getSubQuestions(QA qa) {
+        List<SubQuestion> result = new ArrayList<>();
+        String query = String.format("SELECT question, level FROM subQ\n" +
+                "WHERE qa_id = \"%d\"", qa.getId());
+        try {
+            ResultSet resultSet = statement.executeQuery(query);
+            while (resultSet.next()) {
+                String question = resultSet.getString(1);
+                int level = resultSet.getInt(2);
+                result.add(new SubQuestion(qa.getId(), question, level));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public void updateSubQuestions(QA qa, List<SubQuestion> subQuestions) {
+        deleteQAsubquestions(qa);
+        for (SubQuestion subQuestion : subQuestions) {
+            String query = String.format(
+                    "INSERT INTO subQ (question, level, qa_id)\n" +
+                            "VALUES (\"%s\", \"%d\", \"%d\")",
+                    subQuestion.getQuestion(), subQuestion.getLevel(), qa.getId());
+            executeUpdate(query);
+        }
+    }
+
+    private void deleteQAsubquestions(QA qa) {
+        String query = String.format("DELETE FROM subQ   \n" +
+                "WHERE qa_id = \"%d\";", qa.getId());
         executeUpdate(query);
     }
 }

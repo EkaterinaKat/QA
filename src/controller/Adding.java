@@ -8,11 +8,19 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import utils.Utils;
 import utils.WindowCreator;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Adding implements SectionCreationAware {
+    private Map<TextField, ComboBox> subQuestionMap;
+    @FXML
+    private VBox subQuestionPane;
     @FXML
     private TextField imageTextField;
     @FXML
@@ -32,14 +40,9 @@ public class Adding implements SectionCreationAware {
 
     @FXML
     private void initialize() {
-        tuneLevelBox();
+        subQuestionMap = new HashMap<>();
+        Utils.tuneLevelComboBox(levelBox);
         tuneSectionBox();
-    }
-
-    private void tuneLevelBox() {
-        ObservableList<Integer> levels = FXCollections.observableArrayList(1, 2, 3);
-        levelBox.setItems(levels);
-        levelBox.setValue(1);
     }
 
     private void tuneSectionBox() {
@@ -55,25 +58,54 @@ public class Adding implements SectionCreationAware {
 
     @FXML
     private void addButtonListener() {
+        int qa_id = saveQAtoDB();
+        saveSubQuestionsToDB(qa_id);
+        Catalogue.getInstance().updateCatalogue();
+        clearFields();
+    }
+
+    private int saveQAtoDB() {
         String question = questionTextField.getText();
         String answer = answerTextField.getText();
         int level = levelBox.getValue();
         String section = sectionBox.getValue();
         LocalDate date = datePicker.getValue();
         String image = imageTextField.getText();
-        JDBC.getInstance().addQA(question, answer, level, section, date, image);
-        Catalogue.getInstance().updateCatalogue();
-        clear();
+        return JDBC.getInstance().addQA(question, answer, level, section, date, image);
     }
 
-    private void clear() {
+    private void saveSubQuestionsToDB(int qa_id) {
+        for (Map.Entry entry : subQuestionMap.entrySet()) {
+            String question = ((TextField) entry.getKey()).getText();
+            int level = ((ComboBox<Integer>) entry.getValue()).getValue();
+            JDBC.getInstance().createSubQuestion(question, level, qa_id);
+        }
+    }
+
+    private void clearFields() {
         questionTextField.clear();
         answerTextField.clear();
         imageTextField.clear();
+        subQuestionPane.getChildren().clear();
     }
 
     @Override
     public void inform() {
         tuneSectionBox();
+    }
+
+    @FXML
+    private void addSubQuestionListener() {
+        addElementsForSubQuestion();
+    }
+
+    private void addElementsForSubQuestion() {
+        HBox hBox = new HBox();
+        TextField textField = new TextField();
+        ComboBox<Integer> comboBox = new ComboBox<>();
+        Utils.tuneLevelComboBox(comboBox);
+        hBox.getChildren().addAll(textField, comboBox);
+        subQuestionPane.getChildren().add(hBox);
+        subQuestionMap.put(textField, comboBox);
     }
 }
