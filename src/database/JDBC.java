@@ -181,20 +181,32 @@ public class JDBC {
         return qa;
     }
 
-    public List<QA> getQAlevel1() {
+    public List<QA> getQALevel_0_or_1() {
+        String query = "SELECT id, question, answer, level, section, date, image FROM qa\n" +
+                "WHERE level = 0 OR level = 1";
+        return getQAListByQuery(query);
+    }
+
+    public List<QA> getQALevel_2() {
+        String query = "SELECT id, question, answer, level, section, date, image FROM qa\n" +
+                "WHERE level = 2";
+        return getQAListByQuery(query);
+    }
+
+    /* Запрос должен запрашивать все столбцы */
+    private List<QA> getQAListByQuery(String query) {
         List<QA> list = new ArrayList<>();
-        String query = "SELECT id, question, answer, section, date, image FROM qa\n" +
-                "WHERE level = 1";
         try {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);
                 String question = resultSet.getString(2);
                 String answer = resultSet.getString(3);
-                String section = resultSet.getString(4);
-                String date = resultSet.getString(5);
-                String image = resultSet.getString(6);
-                list.add(new QA(id, question, answer, 1, section, date, image));
+                int level = resultSet.getInt(4);
+                String section = resultSet.getString(5);
+                String date = resultSet.getString(6);
+                String image = resultSet.getString(7);
+                list.add(new QA(id, question, answer, level, section, date, image));
             }
         } catch (SQLException e) {
             e.printStackTrace();

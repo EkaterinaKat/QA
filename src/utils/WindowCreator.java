@@ -42,8 +42,8 @@ public class WindowCreator {
         createModalWindow("show.fxml", SHOW_WIDTH, SHOW_HEIGHT);
     }
 
-    public void createLearn12Window() {
-        createModalWindow("learn12.fxml", MAIN_WIDTH, MAIN_HEIGHT);
+    public void createLearnWindow() {
+        createModalWindow("learn.fxml", MAIN_WIDTH, MAIN_HEIGHT);
     }
 
     public void createCheckWindow() {

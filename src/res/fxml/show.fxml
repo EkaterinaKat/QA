@@ -9,9 +9,7 @@
 
     <Button text="Edit" onMouseClicked="#editButtonListener"/>
     <Pane prefHeight="10"/>
-    <VBox fx:id="questionPane">
-
-    </VBox>
+    <Label fx:id="questionLabel"/>
     <Pane prefHeight="10"/>
 
     <ScrollPane minHeight="700" maxWidth="1000">

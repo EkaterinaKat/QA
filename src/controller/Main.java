@@ -42,6 +42,6 @@ public class Main extends Application {
     }
 
     public void learn12ButtonListener() {
-        Learn12.learn();
+        Learn.start(Learn.LearningMode.TO_2_LEVEL);
     }
 }

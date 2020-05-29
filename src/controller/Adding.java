@@ -65,8 +65,8 @@ public class Adding implements SectionCreationAware {
     }
 
     private int saveQAtoDB() {
-        String question = questionTextField.getText();
-        String answer = answerTextField.getText();
+        String question = questionTextField.getText().trim();
+        String answer = answerTextField.getText().trim();
         int level = levelBox.getValue();
         String section = sectionBox.getValue();
         LocalDate date = datePicker.getValue();
@@ -76,7 +76,7 @@ public class Adding implements SectionCreationAware {
 
     private void saveSubQuestionsToDB(int qa_id) {
         for (Map.Entry entry : subQuestionMap.entrySet()) {
-            String question = ((TextField) entry.getKey()).getText();
+            String question = ((TextField) entry.getKey()).getText().trim();
             int level = ((ComboBox<Integer>) entry.getValue()).getValue();
             JDBC.getInstance().createSubQuestion(question, level, qa_id);
         }

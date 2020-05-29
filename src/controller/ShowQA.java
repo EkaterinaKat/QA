@@ -5,12 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import model.QA;
-import model.SubQuestion;
+import utils.Utils;
 import utils.WindowCreator;
-
-import java.util.List;
 
 import static utils.Constants.IMAGES_PATH;
 
@@ -19,7 +16,7 @@ public class ShowQA {
     @FXML
     private ImageView imageView;
     @FXML
-    private VBox questionPane;
+    private Label questionLabel;
     @FXML
     private Label answerLabel;
     @FXML
@@ -36,22 +33,13 @@ public class ShowQA {
 
     @FXML
     private void initialize() {
-        fillQuestionPane();
+        questionLabel.setText(Utils.getFullDescriptionOfQuestion(qa));
         answerLabel.setText(qa.getAnswer());
         sectionLabel.setText("Section: " + qa.getSection());
         levelLabel.setText("Level: " + qa.getLevel());
         dateLabel.setText(qa.getDate());
         if (!qa.getImage().equals("")) {
             imageView.setImage(new Image(IMAGES_PATH + qa.getImage()));
-        }
-    }
-
-    private void fillQuestionPane() {
-        questionPane.getChildren().add(new Label(qa.getQuestion()));
-        List<SubQuestion> subQuestions = JDBC.getInstance().getSubQuestions(qa);
-        for (SubQuestion subQuestion : subQuestions) {
-            String labelText = String.format("   * %s (%d)", subQuestion.getQuestion(), subQuestion.getLevel());
-            questionPane.getChildren().add(new Label(labelText));
         }
     }
 

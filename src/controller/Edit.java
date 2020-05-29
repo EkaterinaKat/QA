@@ -58,9 +58,9 @@ public class Edit {
     }
 
     private void updateQAtable() {
-        String question = questionTextField.getText();
-        String answer = answerTextField.getText();
-        String image = imageTextField.getText();
+        String question = questionTextField.getText().trim();
+        String answer = answerTextField.getText().trim();
+        String image = imageTextField.getText().trim();
         JDBC.getInstance().editQA(qa, question, answer, image);
     }
 
@@ -72,7 +72,7 @@ public class Edit {
     private List<SubQuestion> collectedEnteredSubQ() {
         List<SubQuestion> subQuestions = new ArrayList<>();
         for (Map.Entry entry : subQuestionElementsMap.entrySet()) {
-            String question = ((TextField) entry.getKey()).getText();
+            String question = ((TextField) entry.getKey()).getText().trim();
             int level = ((ComboBox<Integer>) entry.getValue()).getValue();
             subQuestions.add(new SubQuestion(qa.getId(), question, level));
         }
