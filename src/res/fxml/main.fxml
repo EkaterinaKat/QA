@@ -1,6 +1,4 @@
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <BorderPane fx:controller="controller.Main"
             xmlns:fx="http://javafx.com/fxml">
@@ -8,7 +6,11 @@
     <top>
         <HBox>
             <Button text="add QA" onMouseClicked="#addButtonListener"/>
-            <Button text="learn 1->2" onMouseClicked="#learn12ButtonListener"/>
+            <Button text="learn 0/1->2" onMouseClicked="#learn012ButtonListener"/>
+            <Button text="learn 2->3" onMouseClicked="#learn23ButtonListener"/>
+            <Button text="0/1 level" fx:id="level_01_button" onMouseClicked="#level01ButtonListener"/>
+            <Button text="2 level" fx:id="level_2_button" onMouseClicked="#level2ButtonListener"/>
+            <Button text="3 level" fx:id="level_3_button" onMouseClicked="#level3ButtonListener"/>
             <TextField fx:id="searchField"/>
         </HBox>
     </top>
