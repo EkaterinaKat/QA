@@ -142,7 +142,7 @@ public class Learn {
         }
 
         public String getQuestion() {
-            return Utils.getFullDescriptionOfQuestion(qa);
+            return Utils.getStringDescOfQuestion(qa);
         }
 
         public QA getQa() {

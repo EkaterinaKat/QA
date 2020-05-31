@@ -4,12 +4,13 @@ import controller.ShowQA;
 import database.JDBC;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import model.QA;
 import utils.Utils;
 
 import java.util.List;
 
-public class CatalogueMode01 implements CatalogueMode{
+public class CatalogueMode01 implements CatalogueMode {
     private GridPane table;
 
     CatalogueMode01(GridPane table) {
@@ -23,9 +24,10 @@ public class CatalogueMode01 implements CatalogueMode{
 
     @Override
     public void addQuestionToCatalogue(QA qa, int row) {
-        int numOfQinList = row+1;
-        Label label = new Label(numOfQinList+"   "+Utils.getFullDescriptionOfQuestion(qa));
-        label.setOnMouseClicked(event -> ShowQA.show(qa));
-        table.add(label, 0, row);
+        int numOfQinList = row + 1;
+        HBox hBox = new HBox();
+        hBox.getChildren().addAll(new Label(numOfQinList + " "), Utils.getVBoxDescOfQuestion(qa));
+        hBox.setOnMouseClicked(event -> ShowQA.show(qa));
+        table.add(hBox, 0, row);
     }
 }

@@ -3,27 +3,63 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.ShowQA">
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.ShowQA">
 
-    <Button text="Edit" onMouseClicked="#editButtonListener"/>
-    <Pane prefHeight="10"/>
-    <Label fx:id="questionLabel"/>
-    <Pane prefHeight="10"/>
 
-    <ScrollPane minHeight="700" maxWidth="1000">
+    <top>
         <VBox>
-            <Label fx:id="answerLabel" wrapText="true" maxWidth="900"/>
-            <Pane prefHeight="15"/>
-            <ImageView fx:id="imageView" fitWidth="900"/>
+            <Pane minHeight="20"/>
+            <HBox>
+                <Pane minWidth="40"/>
+                <Label fx:id="levelLabel"/>
+                <Pane prefWidth="30"/>
+                <Label fx:id="sectionLabel"/>
+                <Pane prefWidth="30"/>
+                <Label fx:id="dateLabel"/>
+            </HBox>
+            <Pane minHeight="20"/>
         </VBox>
-    </ScrollPane>
-    <Pane prefHeight="10"/>
-    <Label fx:id="levelLabel"/>
-    <Pane prefHeight="10"/>
-    <Label fx:id="sectionLabel"/>
-    <Pane prefHeight="10"/>
-    <Label fx:id="dateLabel"/>
+    </top>
 
-</VBox>
+    <center>
+        <VBox>
+            <Pane prefHeight="10"/>
+            <VBox fx:id="questionBox"/>
+            <Pane prefHeight="10"/>
+
+            <ScrollPane maxWidth="1350">
+                <VBox>
+                    <Label fx:id="answerLabel" wrapText="true" maxWidth="1280"/>
+                    <Pane prefHeight="15"/>
+                    <ImageView fx:id="imageView"/>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+    <bottom>
+
+        <VBox>
+            <Pane minHeight="20"/>
+            <HBox>
+                <Pane minWidth="40"/>
+                <Button text="Edit" onMouseClicked="#editButtonListener"/>
+            </HBox>
+            <Pane minHeight="20"/>
+        </VBox>
+
+
+    </bottom>
+
+    <left>
+        <Pane minWidth="40"/>
+    </left>
+
+    <right>
+        <Pane minWidth="40"/>
+    </right>
+
+
+</BorderPane>

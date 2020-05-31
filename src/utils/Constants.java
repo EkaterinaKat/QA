@@ -17,7 +17,7 @@ public class Constants {
     static final int ADDING_HEIGHT = 1000;
     static final int ADDING_WIDTH = 1000;
     static final int SHOW_HEIGHT = 1000;
-    static final int SHOW_WIDTH = 1000;
+    static final int SHOW_WIDTH = 1400;
     static final int ADDING_SECTION_HEIGHT = 150;
     static final int ADDING_SECTION_WIDTH = 410;
 }

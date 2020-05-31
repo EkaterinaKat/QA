@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import model.QA;
 import utils.Utils;
 import utils.WindowCreator;
@@ -15,7 +16,7 @@ public class ShowQA {
     @FXML
     private ImageView imageView;
     @FXML
-    private Label questionLabel;
+    private VBox questionBox;
     @FXML
     private Label answerLabel;
     @FXML
@@ -32,7 +33,7 @@ public class ShowQA {
 
     @FXML
     private void initialize() {
-        questionLabel.setText(Utils.getFullDescriptionOfQuestion(qa));
+        questionBox.getChildren().add(Utils.getVBoxDescOfQuestion(qa));
         answerLabel.setText(qa.getAnswer());
         sectionLabel.setText("Section: " + qa.getSection());
         levelLabel.setText("Level: " + qa.getLevel());
