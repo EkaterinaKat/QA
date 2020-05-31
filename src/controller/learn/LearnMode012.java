@@ -5,6 +5,7 @@ import controller.learn.Check.Group.SubGroup;
 import database.JDBC;
 import model.HavingLevel;
 import model.QA;
+import utils.DateManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +15,7 @@ public class LearnMode012 implements LearnMode {
     @Override
     public void changeLevel(HavingLevel havingLevel, boolean learningSucceed) {
         if (learningSucceed)
-            havingLevel.setLevel(havingLevel.getLevel()+1);
+            havingLevel.setLevel(havingLevel.getLevel() + 1);
     }
 
     @Override
@@ -27,8 +28,8 @@ public class LearnMode012 implements LearnMode {
         List<SubGroup> subGroups = group.getSubGroups();
         if (!subGroups.isEmpty()) {
             group.getCheckBox().setDisable(true);
-            for (SubGroup subGroup: subGroups){
-                if(subGroup.getLevel()==2)
+            for (SubGroup subGroup : subGroups) {
+                if (subGroup.getLevel() == 2)
                     subGroup.setDisableAndTurnGray();
             }
         }
@@ -37,19 +38,25 @@ public class LearnMode012 implements LearnMode {
     @Override
     public void setAndSynchronizeNewLevels(Group group) {
         List<SubGroup> subGroups = group.getSubGroups();
-        if (subGroups.isEmpty()){
+        if (subGroups.isEmpty()) {
             changeLevel(group.getQa(), group.getCheckBox().isSelected());
-        }else {
-            for (SubGroup subGroup: subGroups){
+        } else {
+            for (SubGroup subGroup : subGroups) {
                 changeLevel(subGroup.getSubQuestion(), subGroup.getCheckBox().isSelected());
             }
             group.getQa().setLevel(getMinSubQLevel(subGroups));
         }
+        updateDateIfNeeded(group.getQa());
     }
 
-    private int getMinSubQLevel(List<SubGroup> subGroups){
+    private void updateDateIfNeeded(QA qa) {
+        if (qa.getLevel() == 2)
+            qa.setDate(DateManager.getInstance().getCurrentDateString());
+    }
+
+    private int getMinSubQLevel(List<SubGroup> subGroups) {
         List<Integer> levels = new ArrayList<>();
-        for (SubGroup subGroup: subGroups){
+        for (SubGroup subGroup : subGroups) {
             levels.add(subGroup.getLevel());
         }
         Collections.sort(levels);

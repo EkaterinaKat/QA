@@ -20,7 +20,7 @@ public class LearnMode23 implements LearnMode {
     @Override
     public List<QA> getQAFromDB() {
         List<QA> qas = JDBC.getInstance().getQALevel_2();
-        new DateManager().removeQAThatYounger2Month(qas);
+        DateManager.getInstance().removeQAThatYounger2Month(qas);
         return qas;
     }
 
@@ -39,5 +39,11 @@ public class LearnMode23 implements LearnMode {
         for (SubGroup subGroup : subGroups) {
             subGroup.getSubQuestion().setLevel(group.getQa().getLevel());
         }
+        updateDateIfNeeded(group.getQa());
+    }
+
+    private void updateDateIfNeeded(QA qa) {
+        if (qa.getLevel() == 3)
+            qa.setDate(DateManager.getInstance().getCurrentDateString());
     }
 }

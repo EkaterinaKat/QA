@@ -1,6 +1,6 @@
 package model;
 
-public class QA implements HavingLevel{
+public class QA implements HavingLevel {
     private int id;
     private String question;
     private String answer;
@@ -55,5 +55,9 @@ public class QA implements HavingLevel{
 
     public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

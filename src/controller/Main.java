@@ -1,5 +1,6 @@
 package controller;
 
+import controller.Catalogue.Catalogue;
 import controller.learn.Learn;
 import controller.learn.LearnMode012;
 import controller.learn.LearnMode23;

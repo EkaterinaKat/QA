@@ -1,5 +1,6 @@
 package controller;
 
+import controller.Catalogue.Catalogue;
 import database.JDBC;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;

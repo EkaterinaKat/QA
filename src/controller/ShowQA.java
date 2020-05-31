@@ -1,6 +1,5 @@
 package controller;
 
-import database.JDBC;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -26,7 +25,7 @@ public class ShowQA {
     @FXML
     private Label dateLabel;
 
-    static void show(QA qaToShow) {
+    public static void show(QA qaToShow) {
         qa = qaToShow;
         WindowCreator.getInstance().createShowWindow();
     }

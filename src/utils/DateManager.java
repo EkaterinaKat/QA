@@ -10,10 +10,15 @@ import java.util.Iterator;
 import java.util.List;
 
 public class DateManager {
+    private static final DateManager INSTANCE = new DateManager();
     private SimpleDateFormat dateFormat = new SimpleDateFormat();
     private Date twoMonthAgo;
 
-    public DateManager() {
+    public static DateManager getInstance() {
+        return INSTANCE;
+    }
+
+    private DateManager() {
         dateFormat.applyPattern("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, -2);
@@ -42,5 +47,18 @@ public class DateManager {
             e.printStackTrace();
         }
         return date;
+    }
+
+    public void sortByDate(List<QA> list) {
+        list.sort((o1, o2) -> {
+            Date date1 = stringToDate(o1.getDate());
+            Date date2 = stringToDate(o2.getDate());
+            return date1.compareTo(date2);
+        });
+    }
+
+    public String getCurrentDateString() {
+        Calendar calendar = Calendar.getInstance();
+        return dateFormat.format(calendar.getTime());
     }
 }

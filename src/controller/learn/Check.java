@@ -1,5 +1,6 @@
 package controller.learn;
 
+import controller.Catalogue.Catalogue;
 import database.JDBC;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,6 +20,7 @@ import utils.WindowCreator;
 import java.util.ArrayList;
 import java.util.List;
 
+import static utils.Constants.CHECK_WIDTH;
 import static utils.Constants.IMAGES_PATH;
 
 public class Check {
@@ -56,6 +58,8 @@ public class Check {
         scrollPane.setMaxHeight(300);
         VBox vBox = new VBox();
         Label label = new Label(qa.getAnswer());
+        label.setMaxWidth(CHECK_WIDTH - 50);
+        label.wrapTextProperty().setValue(true);
         ImageView imageView = new ImageView(new Image(IMAGES_PATH + qa.getImage()));
         vBox.getChildren().addAll(label, imageView);
         scrollPane.setContent(vBox);
@@ -76,6 +80,7 @@ public class Check {
             group.updateLabels();
         }
         applyButton.setDisable(true);
+        Catalogue.getInstance().updateCatalogue();
     }
 
     @FXML
@@ -103,11 +108,11 @@ public class Check {
 
         void applyAccordingStyle(Label label, boolean b) {
             if (b) {
-                label.setStyle("-fx-text-fill: #0ADB00 \n" +
-                        "-fx-font-weight: bold");
+                label.setStyle("-fx-text-fill: #0ADB00; \n" +
+                        "-fx-font-weight: bold;");
             } else {
-                label.setStyle("-fx-text-fill: #000000 \n" +
-                        "-fx-font-weight: normal");
+                label.setStyle("-fx-text-fill: #000000; \n" +
+                        "-fx-font-weight: normal;");
             }
         }
 
@@ -125,12 +130,13 @@ public class Check {
         void applyResults() {
             /* Записываем результаты локально в объекты */
             mode.setAndSynchronizeNewLevels(this);
-            /* Записываем результаты в БД */
+            /* Записываем результаты в БД, доставая их прямо из объектов */
             saveResultsToDB();
         }
 
         private void saveResultsToDB() {
             JDBC.getInstance().setQANewLevel(qa);
+            JDBC.getInstance().setNewDate(qa);
             for (SubGroup subGroup : subGroups) {
                 JDBC.getInstance().setSubQNewLevel(subGroup.getSubQuestion());
             }

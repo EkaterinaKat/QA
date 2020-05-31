@@ -311,4 +311,11 @@ public class JDBC {
         }
         return level;
     }
+
+    public void setNewDate(QA qa) {
+        String query = String.format("UPDATE qa \n" +
+                "\t   SET date = \"%s\" \n" +
+                "\t   WHERE id = \"%d\"", qa.getDate(), qa.getId());
+        executeUpdate(query);
+    }
 }
