@@ -47,7 +47,7 @@ public class WindowCreator {
     }
 
     public void createCheckWindow() {
-        createModalWindow("check.fxml", MAIN_WIDTH, MAIN_HEIGHT);
+        createModalWindow("learn.fxml", MAIN_WIDTH, MAIN_HEIGHT);
     }
 
     private void createModalWindow(String fxmlName, int width, int height) {

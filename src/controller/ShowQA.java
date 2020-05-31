@@ -26,8 +26,8 @@ public class ShowQA {
     @FXML
     private Label dateLabel;
 
-    static void show(String question) {
-        qa = JDBC.getInstance().getQAbyQuestion(question);
+    static void show(QA qaToShow) {
+        qa = qaToShow;
         WindowCreator.getInstance().createShowWindow();
     }
 

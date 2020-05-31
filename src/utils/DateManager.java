@@ -20,14 +20,13 @@ public class DateManager {
         twoMonthAgo = calendar.getTime();
     }
 
-    public List<QA> removeQAThatYonger2Month(List<QA> list) {
+    public void removeQAThatYounger2Month(List<QA> list) {
         Iterator<QA> iterator = list.iterator();
         while (iterator.hasNext()) {
             String dateString = iterator.next().getDate();
             if (lessThan2MonthAgo(dateString))
                 iterator.remove();
         }
-        return list;
     }
 
     private boolean lessThan2MonthAgo(String stingDate) {

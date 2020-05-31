@@ -27,10 +27,10 @@ public class Utils {
     }
 
     public static String getFullDescriptionOfQuestion(QA qa) {
-        StringBuilder desc = new StringBuilder(qa.getQuestion());
+        StringBuilder desc = new StringBuilder(String.format(" %s (%d)", qa.getQuestion(), qa.getLevel()));
         List<SubQuestion> subQuestions = JDBC.getInstance().getSubQuestions(qa);
         for (SubQuestion subQuestion : subQuestions) {
-            desc.append(String.format("\n   * %s (%d)", subQuestion.getQuestion(), subQuestion.getLevel()));
+            desc.append(String.format("\n        * %s (%d)", subQuestion.getQuestion(), subQuestion.getLevel()));
         }
         return desc.toString();
     }

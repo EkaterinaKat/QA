@@ -193,6 +193,12 @@ public class JDBC {
         return getQAListByQuery(query);
     }
 
+    public List<QA> getQALevel_3() {
+        String query = "SELECT id, question, answer, level, section, date, image FROM qa\n" +
+                "WHERE level = 3";
+        return getQAListByQuery(query);
+    }
+
     /* Запрос должен запрашивать все столбцы */
     private List<QA> getQAListByQuery(String query) {
         List<QA> list = new ArrayList<>();
@@ -231,14 +237,15 @@ public class JDBC {
 
     public List<SubQuestion> getSubQuestions(QA qa) {
         List<SubQuestion> result = new ArrayList<>();
-        String query = String.format("SELECT question, level FROM subQ\n" +
+        String query = String.format("SELECT id, question, level FROM subQ\n" +
                 "WHERE qa_id = \"%d\"", qa.getId());
         try {
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                String question = resultSet.getString(1);
-                int level = resultSet.getInt(2);
-                result.add(new SubQuestion(qa.getId(), question, level));
+                int ID = resultSet.getInt(1);
+                String question = resultSet.getString(2);
+                int level = resultSet.getInt(3);
+                result.add(new SubQuestion(ID, qa.getId(), question, level));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -261,5 +268,47 @@ public class JDBC {
         String query = String.format("DELETE FROM subQ   \n" +
                 "WHERE qa_id = \"%d\";", qa.getId());
         executeUpdate(query);
+    }
+
+    public void setQANewLevel(QA qa) {
+        String query = String.format("UPDATE qa \n" +
+                "\t   SET level = \"%d\" \n" +
+                "\t   WHERE id = \"%d\"", qa.getLevel(), qa.getId());
+        executeUpdate(query);
+    }
+
+    public void setSubQNewLevel(SubQuestion subQuestion) {
+        String query = String.format("UPDATE subQ \n" +
+                "\t   SET level = \"%d\" \n" +
+                "\t   WHERE id = \"%d\"", subQuestion.getLevel(), subQuestion.getID());
+        executeUpdate(query);
+    }
+
+    public int getQuestionLevel(QA qa) {
+        int level = -5;
+        String query = String.format("SELECT level FROM qa \n" +
+                "WHERE id = \"%d\"", qa.getId());
+        try {
+            ResultSet resultSet = statement.executeQuery(query);
+            resultSet.next();
+            level = resultSet.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return level;
+    }
+
+    public int getSubQLevel(SubQuestion subQuestion) {
+        int level = -5;
+        String query = String.format("SELECT level FROM subQ \n" +
+                "WHERE id = \"%d\"", subQuestion.getID());
+        try {
+            ResultSet resultSet = statement.executeQuery(query);
+            resultSet.next();
+            level = resultSet.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return level;
     }
 }

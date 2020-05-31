@@ -1,6 +1,6 @@
 package model;
 
-public class QA {
+public class QA implements HavingLevel{
     private int id;
     private String question;
     private String answer;
@@ -31,8 +31,14 @@ public class QA {
         return answer;
     }
 
+    @Override
     public int getLevel() {
         return level;
+    }
+
+    @Override
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public String getSection() {

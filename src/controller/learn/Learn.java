@@ -1,6 +1,5 @@
-package controller;
+package controller.learn;
 
-import database.JDBC;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
@@ -12,7 +11,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.QA;
-import utils.DateManager;
 import utils.Utils;
 import utils.WindowCreator;
 
@@ -21,7 +19,7 @@ import java.util.List;
 
 /* Класс относительно закончен */
 public class Learn {
-    private static LearningMode mode;
+    private static LearnMode mode;
     private List<SelectableQuestion> selectableQuestions;
     @FXML
     private TableColumn<SelectableQuestion, Number> countColumn;
@@ -34,12 +32,8 @@ public class Learn {
     @FXML
     private TableView<SelectableQuestion> table;
 
-    enum LearningMode {
-        TO_2_LEVEL, TO_3_LEVEL
-    }
-
-    static void start(LearningMode learningMode) {
-        mode = learningMode;
+    public static void start(LearnMode learnMode) {
+        mode = learnMode;
         WindowCreator.getInstance().createLearnWindow();
     }
 
@@ -58,9 +52,7 @@ public class Learn {
         checkBoxColumn.setCellValueFactory(param -> {
             SelectableQuestion selectableQuestion = param.getValue();
             SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(selectableQuestion.isSelected());
-            booleanProperty.addListener((observable, oldValue, newValue) -> {
-                selectableQuestion.setSelected(newValue);
-            });
+            booleanProperty.addListener((observable, oldValue, newValue) -> selectableQuestion.setSelected(newValue));
             return booleanProperty;
         });
         checkBoxColumn.setCellFactory(param -> {
@@ -72,15 +64,7 @@ public class Learn {
 
     /* Этот метод можно вызывать только один раз при инициализации */
     private void fillTable() {
-        List<QA> qas = new ArrayList<>();
-        switch (mode) {
-            case TO_2_LEVEL:
-                qas = JDBC.getInstance().getQALevel_0_or_1();
-                break;
-            case TO_3_LEVEL:
-                qas = JDBC.getInstance().getQALevel_2();
-                new DateManager().removeQAThatYonger2Month(qas);
-        }
+        List<QA> qas = mode.getQAFromDB();
         ObservableList<SelectableQuestion> observableList = FXCollections.observableArrayList();
         selectableQuestions = convertQuestionsToSelectableQuestions(qas);
         observableList.addAll(selectableQuestions);
@@ -100,13 +84,7 @@ public class Learn {
         List<SelectableQuestion> selectedQuestions = getSelectedQuestions();
         removeFromTable(selectedQuestions);
         List<QA> qas = convertSelectableQuestionsToQuestions(selectedQuestions);
-        switch (mode) {
-            case TO_2_LEVEL:
-                Check012.check(qas);
-                break;
-            case TO_3_LEVEL:
-                Check23.check(qas);
-        }
+        Check.check(qas, mode);
     }
 
     private List<SelectableQuestion> getSelectedQuestions() {
