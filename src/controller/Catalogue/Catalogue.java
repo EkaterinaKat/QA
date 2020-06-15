@@ -1,5 +1,6 @@
 package controller.Catalogue;
 
+import database.JDBC;
 import javafx.scene.layout.GridPane;
 import model.QA;
 
@@ -34,9 +35,9 @@ public class Catalogue {
         }
     }
 
-    public void updateCatalogue(String string) {
+    public void updateCatalogueUsingSearchString(String string) {
         table.getChildren().clear();
-        List<QA> qas = mode.getQAsFromDB();
+        List<QA> qas = JDBC.getInstance().getAllQA();
         int row = 0;
         for (QA qa : qas) {
             if (qa.getQuestion().contains(string)) {

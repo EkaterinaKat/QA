@@ -44,7 +44,7 @@ public class Main extends Application {
     private void initialize() {
         Catalogue.create(gridPane);
         searchField.textProperty().addListener((observable, oldValue, newValue) ->
-                Catalogue.getInstance().updateCatalogue(searchField.getText()));
+                Catalogue.getInstance().updateCatalogueUsingSearchString(searchField.getText()));
         makeButtonActive(level_01_button);
     }
 

@@ -199,6 +199,12 @@ public class JDBC {
         return getQAListByQuery(query);
     }
 
+    public List<QA> getAllQA() {
+        String query = "SELECT id, question, answer, level, section, date, image FROM qa\n" +
+                "WHERE level = 0 OR level = 1 OR level = 2 OR level = 3";
+        return getQAListByQuery(query);
+    }
+
     /* Запрос должен запрашивать все столбцы */
     private List<QA> getQAListByQuery(String query) {
         List<QA> list = new ArrayList<>();

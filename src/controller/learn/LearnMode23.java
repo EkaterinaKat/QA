@@ -14,7 +14,7 @@ public class LearnMode23 implements LearnMode {
         if (learningSucceed)
             havingLevel.setLevel(havingLevel.getLevel() + 1);
         else
-            havingLevel.setLevel(0);
+            havingLevel.setLevel(1);
     }
 
     @Override
