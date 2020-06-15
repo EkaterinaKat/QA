@@ -6,30 +6,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import utils.Utils;
 import utils.WindowCreator;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Adding implements SectionCreationAware {
-    private Map<TextField, ComboBox> subQuestionMap;
+    private List<TextField> subQueTextFields;
     @FXML
     private VBox subQuestionPane;
     @FXML
     private TextField imageTextField;
     @FXML
     private ComboBox<String> sectionBox;
-    @FXML
-    private DatePicker datePicker;
-    @FXML
-    private ComboBox<Integer> levelBox;
     @FXML
     private TextArea questionTextField;
     @FXML
@@ -41,8 +35,7 @@ public class Adding implements SectionCreationAware {
 
     @FXML
     private void initialize() {
-        subQuestionMap = new HashMap<>();
-        Utils.tuneLevelComboBox(levelBox);
+        subQueTextFields = new ArrayList<>();
         tuneSectionBox();
     }
 
@@ -68,17 +61,17 @@ public class Adding implements SectionCreationAware {
     private int saveQAtoDB() {
         String question = questionTextField.getText().trim();
         String answer = answerTextField.getText().trim();
-        int level = levelBox.getValue();
+        int level = 0;
         String section = sectionBox.getValue();
-        LocalDate date = datePicker.getValue();
+        LocalDate date = LocalDate.now();
         String image = imageTextField.getText();
         return JDBC.getInstance().addQA(question, answer, level, section, date, image);
     }
 
     private void saveSubQuestionsToDB(int qa_id) {
-        for (Map.Entry entry : subQuestionMap.entrySet()) {
-            String question = ((TextField) entry.getKey()).getText().trim();
-            int level = ((ComboBox<Integer>) entry.getValue()).getValue();
+        for (TextField textField : subQueTextFields) {
+            String question = textField.getText();
+            int level = 0;
             JDBC.getInstance().createSubQuestion(question, level, qa_id);
         }
     }
@@ -103,10 +96,8 @@ public class Adding implements SectionCreationAware {
     private void addElementsForSubQuestion() {
         HBox hBox = new HBox();
         TextField textField = new TextField();
-        ComboBox<Integer> comboBox = new ComboBox<>();
-        Utils.tuneLevelComboBox(comboBox);
-        hBox.getChildren().addAll(textField, comboBox);
+        hBox.getChildren().addAll(textField);
         subQuestionPane.getChildren().add(hBox);
-        subQuestionMap.put(textField, comboBox);
+        subQueTextFields.add(textField);
     }
 }
