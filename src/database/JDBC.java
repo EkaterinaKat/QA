@@ -187,15 +187,15 @@ public class JDBC {
         return result;
     }
 
-    public QA getQAbyQuestion(String question) {  //todo поч этот метод вообще нигде не используется
+    public QA getQAbyID(int id) {
         QA qa = null;
-        String query = String.format("SELECT id, answer, level, section, date, image FROM qa\n" +
-                "WHERE question = \"%s\"", question);
+        String query = String.format("SELECT question, answer, level, section, date, image FROM qa\n" +
+                "WHERE id = \"%d\"", id);
         try {
             ResultSet resultSet = statement.executeQuery(query);
             resultSet.next();
 
-            int id = resultSet.getInt(1);
+            String question = resultSet.getString(1);
             String answer = resultSet.getString(2);
             int level = resultSet.getInt(3);
             String section = resultSet.getString(4);

@@ -19,8 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Edit {
-    private Map<TextField, ComboBox> subQuestionElementsMap = new HashMap<>();
+    private Map<TextField, ComboBox<Integer>> subQuestionElementsMap = new HashMap<>();
     private static QA qa;
+    private static ShowQA showWindow;
     @FXML
     private VBox subQuestionPane;
     @FXML
@@ -30,8 +31,9 @@ public class Edit {
     @FXML
     private TextArea answerTextField;
 
-    static void editQA(QA qa1) {
+    static void editQA(QA qa1, ShowQA showQA) {
         qa = qa1;
+        showWindow = showQA;
         WindowCreator.getInstance().createEditWindow();
     }
 
@@ -55,6 +57,7 @@ public class Edit {
         updateQAtableInDb();
         updateSubQtableInDb();
         Catalogue.getInstance().updateCatalogue();
+        showWindow.update();
         Utils.closeWindowThatContains(questionTextField);
     }
 
@@ -72,9 +75,9 @@ public class Edit {
 
     private List<SubQuestion> collectedEnteredSubQ() {
         List<SubQuestion> subQuestions = new ArrayList<>();
-        for (Map.Entry entry : subQuestionElementsMap.entrySet()) {
-            String question = ((TextField) entry.getKey()).getText().trim();
-            int level = ((ComboBox<Integer>) entry.getValue()).getValue();
+        for (Map.Entry<TextField, ComboBox<Integer>> entry : subQuestionElementsMap.entrySet()) {
+            String question = entry.getKey().getText().trim();
+            int level = entry.getValue().getValue();
             subQuestions.add(new SubQuestion(qa.getId(), question, level));
         }
         return subQuestions;

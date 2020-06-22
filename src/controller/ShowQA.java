@@ -35,6 +35,17 @@ public class ShowQA {
 
     @FXML
     private void initialize() {
+        update();
+    }
+
+    @FXML
+    private void editButtonListener() {
+        Edit.editQA(qa, this);
+    }
+
+    void update() {
+        qa = JDBC.getInstance().getQAbyID(qa.getId());
+        questionBox.getChildren().clear();
         questionBox.getChildren().add(Utils.getVBoxDescOfQuestion(qa));
         answerLabel.setText(qa.getAnswer());
         sectionLabel.setText("Section: " + qa.getSection());
@@ -43,11 +54,6 @@ public class ShowQA {
         if (!qa.getImage().equals("")) {
             imageView.setImage(new Image(IMAGES_PATH + qa.getImage()));
         }
-    }
-
-    @FXML
-    private void editButtonListener() {
-        Edit.editQA(qa);
     }
 
     @FXML
