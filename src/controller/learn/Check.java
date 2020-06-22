@@ -58,8 +58,9 @@ public class Check {
         scrollPane.setMaxHeight(400);
         VBox vBox = new VBox();
         Label label = new Label(qa.getAnswer());
-        label.setMaxWidth(CHECK_WIDTH - 20);
-        label.setMinWidth(CHECK_WIDTH - 20);
+        label.setMaxWidth(CHECK_WIDTH - 80);
+        scrollPane.setMaxWidth(CHECK_WIDTH - 40);
+        scrollPane.setMinWidth(CHECK_WIDTH - 40);
         label.wrapTextProperty().setValue(true);
         ImageView imageView = new ImageView(new Image(IMAGES_PATH + qa.getImage()));
         vBox.getChildren().addAll(label, imageView);

@@ -90,7 +90,8 @@ public class Edit {
         HBox hBox = new HBox();
         TextField textField = new TextField();
         ComboBox<Integer> comboBox = new ComboBox<>();
-        Utils.tuneLevelComboBox(comboBox);
+        comboBox.setDisable(true);
+        comboBox.setValue(0);
         hBox.getChildren().addAll(textField, comboBox);
         subQuestionPane.getChildren().add(hBox);
         subQuestionElementsMap.put(textField, comboBox);
@@ -101,7 +102,7 @@ public class Edit {
         HBox hBox = new HBox();
         TextField textField = new TextField();
         ComboBox<Integer> comboBox = new ComboBox<>();
-        Utils.tuneLevelComboBox(comboBox);
+        comboBox.setDisable(true);
         comboBox.setValue(subQuestion.getLevel());
         textField.setText(subQuestion.getQuestion());
         hBox.getChildren().addAll(textField, comboBox);

@@ -13,7 +13,7 @@ public class Constants {
     static final int MAIN_HEIGHT = 1000;
     static final int MAIN_WIDTH = 1200;
     static final int CHECK_HEIGHT = 1000;
-    public static final int CHECK_WIDTH = 1200;
+    public static final int CHECK_WIDTH = 1300;
     static final int ADDING_HEIGHT = 1000;
     static final int ADDING_WIDTH = 1000;
     static final int SHOW_HEIGHT = 1000;
