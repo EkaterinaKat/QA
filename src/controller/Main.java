@@ -13,7 +13,13 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import utils.WindowCreator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main extends Application {
+    private List<Button> catalogueModeButtons = new ArrayList<>();
+    @FXML
+    private Button sectionsButton;
     @FXML
     private Button level_01_button;
     @FXML
@@ -44,8 +50,13 @@ public class Main extends Application {
     private void initialize() {
         Catalogue.create(gridPane);
         searchField.textProperty().addListener((observable, oldValue, newValue) ->
-                Catalogue.getInstance().updateCatalogueUsingSearchString(searchField.getText()));
-        makeButtonActive(level_01_button);
+                Catalogue.getInstance().search(searchField.getText()));
+        level01ButtonListener();
+
+        catalogueModeButtons.add(level_01_button);
+        catalogueModeButtons.add(level_2_button);
+        catalogueModeButtons.add(level_3_button);
+        catalogueModeButtons.add(sectionsButton);
     }
 
     @FXML
@@ -53,44 +64,44 @@ public class Main extends Application {
         Adding.addQA();
     }
 
-    public void learn012ButtonListener() {
+    @FXML
+    private void learn012ButtonListener() {
         Learn.start(new LearnMode012());
     }
 
-    public void learn23ButtonListener() {
+    @FXML
+    private void learn23ButtonListener() {
         Learn.start(new LearnMode23());
     }
 
     @FXML
     private void level01ButtonListener() {
-        makeButtonActive(level_01_button);
-        makeButtonInactive(level_2_button);
-        makeButtonInactive(level_3_button);
+        activateButton(level_01_button);
         Catalogue.getInstance().show_01_level();
     }
 
     @FXML
     private void level2ButtonListener() {
-        makeButtonActive(level_2_button);
-        makeButtonInactive(level_01_button);
-        makeButtonInactive(level_3_button);
+        activateButton(level_2_button);
         Catalogue.getInstance().show_2_level();
     }
 
     @FXML
     private void level3ButtonListener() {
-        makeButtonActive(level_3_button);
-        makeButtonInactive(level_2_button);
-        makeButtonInactive(level_01_button);
+        activateButton(level_3_button);
         Catalogue.getInstance().show_3_level();
     }
 
-    private void makeButtonActive(Button button) {
-        button.setDisable(true);
+    @FXML
+    private void sectionsButtonListener() {
+        activateButton(sectionsButton);
+        Catalogue.getInstance().showSections();
     }
 
-    private void makeButtonInactive(Button button) {
-        button.setDisable(false);
+    private void activateButton(Button buttonToActivate) {
+        for (Button button : catalogueModeButtons) {
+            button.setDisable(false);
+        }
+        buttonToActivate.setDisable(true);
     }
-
 }

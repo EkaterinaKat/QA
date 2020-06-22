@@ -160,7 +160,7 @@ public class JDBC {
         return result;
     }
 
-    public QA getQAbyQuestion(String question) {
+    public QA getQAbyQuestion(String question) {  //todo поч этот метод вообще нигде не используется
         QA qa = null;
         String query = String.format("SELECT id, answer, level, section, date, image FROM qa\n" +
                 "WHERE question = \"%s\"", question);
@@ -202,6 +202,12 @@ public class JDBC {
     public List<QA> getAllQA() {
         String query = "SELECT id, question, answer, level, section, date, image FROM qa\n" +
                 "WHERE level = 0 OR level = 1 OR level = 2 OR level = 3";
+        return getQAListByQuery(query);
+    }
+
+    public List<QA> getQAsBySection(String section) {
+        String query = String.format("SELECT id, question, answer, level, section, date, image FROM qa\n" +
+                "WHERE section = \"%s\"; ", section);
         return getQAListByQuery(query);
     }
 

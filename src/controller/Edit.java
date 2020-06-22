@@ -52,20 +52,20 @@ public class Edit {
 
     @FXML
     private void doneButtonListener() {
-        updateQAtable();
-        updateSubQtable();
+        updateQAtableInDb();
+        updateSubQtableInDb();
         Catalogue.getInstance().updateCatalogue();
         Utils.closeWindowThatContains(questionTextField);
     }
 
-    private void updateQAtable() {
+    private void updateQAtableInDb() {
         String question = questionTextField.getText().trim();
         String answer = answerTextField.getText().trim();
         String image = imageTextField.getText().trim();
         JDBC.getInstance().editQA(qa, question, answer, image);
     }
 
-    private void updateSubQtable() {
+    private void updateSubQtableInDb() {
         List<SubQuestion> subQuestions = collectedEnteredSubQ();
         JDBC.getInstance().updateSubQuestions(qa, subQuestions);
     }

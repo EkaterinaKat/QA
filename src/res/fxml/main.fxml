@@ -11,6 +11,7 @@
             <Button text="0/1 level" fx:id="level_01_button" onMouseClicked="#level01ButtonListener"/>
             <Button text="2 level" fx:id="level_2_button" onMouseClicked="#level2ButtonListener"/>
             <Button text="3 level" fx:id="level_3_button" onMouseClicked="#level3ButtonListener"/>
+            <Button text="Sections" fx:id="sectionsButton" onMouseClicked="#sectionsButtonListener"/>
             <TextField fx:id="searchField"/>
         </HBox>
     </top>

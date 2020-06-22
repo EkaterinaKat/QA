@@ -1,15 +1,13 @@
 package controller.Catalogue;
 
-import database.JDBC;
 import javafx.scene.layout.GridPane;
-import model.QA;
-
-import java.util.List;
 
 public class Catalogue {
     private static Catalogue instance;
-    private CatalogueMode mode;
-    private GridPane table;
+    private CatalogueMode activeCatalougeMode;
+    private LevelCatalogue levelCatalogue;
+    private SectionsCatalogue sectionsCatalogue;
+    private SearchCatalogue searchCatalogue;
 
     public static Catalogue getInstance() {
         return instance;
@@ -20,45 +18,37 @@ public class Catalogue {
     }
 
     private Catalogue(GridPane table) {
-        this.table = table;
-        mode = new CatalogueMode01(table);
-        updateCatalogue();
+        levelCatalogue = new LevelCatalogue(table);
+        sectionsCatalogue = new SectionsCatalogue(table);
+        searchCatalogue = new SearchCatalogue(table);
     }
 
-    public void updateCatalogue() {
-        table.getChildren().clear();
-        List<QA> qas = mode.getQAsFromDB();
-        int row = 0;
-        for (QA qa : qas) {
-            mode.addQuestionToCatalogue(qa, row);
-            row++;
-        }
-    }
-
-    public void updateCatalogueUsingSearchString(String string) {
-        table.getChildren().clear();
-        List<QA> qas = JDBC.getInstance().getAllQA();
-        int row = 0;
-        for (QA qa : qas) {
-            if (qa.getQuestion().contains(string)) {
-                mode.addQuestionToCatalogue(qa, row);
-                row++;
-            }
-        }
+    public void search(String s) {
+        searchCatalogue.searchAndShow(s);
+        activeCatalougeMode = searchCatalogue;
     }
 
     public void show_01_level() {
-        mode = new CatalogueMode01(table);
-        updateCatalogue();
+        levelCatalogue.show_01_level();
+        activeCatalougeMode = levelCatalogue;
     }
 
     public void show_2_level() {
-        mode = new CatalogueMode2(table);
-        updateCatalogue();
+        levelCatalogue.show_2_level();
+        activeCatalougeMode = levelCatalogue;
     }
 
     public void show_3_level() {
-        mode = new CatalogueMode3(table);
-        updateCatalogue();
+        levelCatalogue.show_3_level();
+        activeCatalougeMode = levelCatalogue;
+    }
+
+    public void showSections() {
+        sectionsCatalogue.showSections();
+        activeCatalougeMode = sectionsCatalogue;
+    }
+
+    public void updateCatalogue() {
+        activeCatalougeMode.updateCatalogue();
     }
 }
