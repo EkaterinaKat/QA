@@ -21,6 +21,33 @@ public class JDBC {
             createQATable();
         if (!tableExists("subQ"))
             createSubQTable();
+        if (!tableExists("archive_qa"))
+            createArchiveQA();
+        if (!tableExists("archive_subqa"))
+            createArchiveSubQA();
+    }
+
+    private void createArchiveQA() {
+        String query = "CREATE TABLE archive_qa (\n" +
+                "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    question TEXT,\n" +
+                "    answer   TEXT,\n" +
+                "    level    INTEGER,\n" +
+                "    section  STRING,\n" +
+                "    date     STRING,\n" +
+                "    image    STRING\n" +
+                ");";
+        executeUpdate(query);
+    }
+
+    private void createArchiveSubQA() {
+        String query = "CREATE TABLE archive_subqa (\n" +
+                "    id       INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    question TEXT,\n" +
+                "    level    INTEGER,\n" +
+                "    qa_id    INTEGER\n" +
+                ");";
+        executeUpdate(query);
     }
 
     private void createSubQTable() {
@@ -329,5 +356,43 @@ public class JDBC {
                 "\t   SET date = \"%s\" \n" +
                 "\t   WHERE id = \"%d\"", qa.getDate(), qa.getId());
         executeUpdate(query);
+    }
+
+    public void deleteQA(QA qa) {
+        deleteQaById(qa.getId());
+        int id = saveQaToArchive(qa);
+        saveSubQaToArchive(getSubQuestions(qa), id);
+        deleteSubQaByQaId(qa.getId());
+    }
+
+    private void deleteQaById(int id) {
+        String query = String.format("DELETE FROM qa \n" +
+                "WHERE id = \"%d\"; ", id);
+        executeUpdate(query);
+    }
+
+    private int saveQaToArchive(QA qa) {
+        String query = String.format(
+                "INSERT INTO archive_qa (question, answer, level, section, date, image)\n" +
+                        "VALUES (\"%s\", \"%s\", \"%d\", \"%s\", \"%s\", \"%s\")",
+                qa.getQuestion(), qa.getAnswer(), qa.getLevel(), qa.getSection(), qa.getDate(), qa.getImage());
+        executeUpdate(query);
+        return getLastInsertID();
+    }
+
+    private void deleteSubQaByQaId(int qa_id) {
+        String query = String.format("DELETE FROM subQ \n" +
+                "WHERE qa_id = \"%d\"; ", qa_id);
+        executeUpdate(query);
+    }
+
+    private void saveSubQaToArchive(List<SubQuestion> subQuestions, int qa_id) {
+        for (SubQuestion subQuestion : subQuestions) {
+            String query = String.format(
+                    "INSERT INTO archive_subqa (question, level, qa_id)\n" +
+                            "VALUES (\"%s\", \"%d\", \"%d\")",
+                    subQuestion.getQuestion(), subQuestion.getLevel(), qa_id);
+            executeUpdate(query);
+        }
     }
 }

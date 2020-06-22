@@ -46,11 +46,11 @@
             <HBox>
                 <Pane minWidth="40"/>
                 <Button text="Edit" onMouseClicked="#editButtonListener"/>
+                <Pane minWidth="1200"/>
+                <Button text="Delete" onMouseClicked="#deleteButtonListener"/>
             </HBox>
             <Pane minHeight="20"/>
         </VBox>
-
-
     </bottom>
 
     <left>

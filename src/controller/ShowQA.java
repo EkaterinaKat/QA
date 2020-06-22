@@ -1,5 +1,7 @@
 package controller;
 
+import controller.Catalogue.Catalogue;
+import database.JDBC;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -46,5 +48,12 @@ public class ShowQA {
     @FXML
     private void editButtonListener() {
         Edit.editQA(qa);
+    }
+
+    @FXML
+    private void deleteButtonListener() {
+        JDBC.getInstance().deleteQA(qa);
+        Catalogue.getInstance().updateCatalogue();
+        Utils.closeWindowThatContains(sectionLabel);
     }
 }
