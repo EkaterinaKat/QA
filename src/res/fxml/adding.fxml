@@ -2,28 +2,52 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.Adding"
-      prefHeight="400.0" prefWidth="600.0">
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.Adding"
+            prefHeight="400.0" prefWidth="600.0">
 
-    <TextArea fx:id="questionTextField" minHeight="200" wrapText="true"/>
-    <TextArea fx:id="answerTextField" minHeight="200" wrapText="true"/>
-    <HBox>
-        <ComboBox fx:id="sectionBox"/>
-        <Button text="Add section" onMouseClicked="#addSectionButtonListener"/>
-    </HBox>
-    <HBox>
-        <Button text="Add SubQuestion" onMouseClicked="#addSubQuestionListener"/>
-        <VBox fx:id="subQuestionPane">
+    <center>
+        <VBox>
+            <TextArea fx:id="questionTextField" prefHeight="80" wrapText="true"/>
+            <Pane prefHeight="20"/>
+            <TextArea fx:id="answerTextField" prefHeight="400" wrapText="true"/>
+            <Pane prefHeight="20"/>
+            <HBox>
+                <ComboBox fx:id="sectionBox"/>
+                <Button text="Add section" onMouseClicked="#addSectionButtonListener"/>
+            </HBox>
+            <Pane prefHeight="20"/>
+            <HBox>
+                <Button text="Add SubQuestion" onMouseClicked="#addSubQuestionListener"/>
+                <VBox fx:id="subQuestionPane">
 
+                </VBox>
+            </HBox>
+            <Pane prefHeight="20"/>
+            <HBox>
+                <Label text="image: "/>
+                <TextField fx:id="imageTextField"/>
+            </HBox>
+            <Pane prefHeight="20"/>
+            <Button text="Add" onMouseClicked="#addButtonListener"/>
         </VBox>
-    </HBox>
-    <HBox>
-        <Label text="image: "/>
-        <TextField fx:id="imageTextField"/>
-    </HBox>
-    <Button text="Add" onMouseClicked="#addButtonListener"/>
+    </center>
 
+    <left>
+        <Pane minWidth="40"/>
+    </left>
 
-</VBox>
+    <right>
+        <Pane minWidth="40"/>
+    </right>
+
+    <top>
+        <Pane minHeight="40"/>
+    </top>
+
+    <bottom>
+        <Pane minHeight="40"/>
+    </bottom>
+
+</BorderPane>

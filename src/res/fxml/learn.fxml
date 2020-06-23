@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.*?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.learn.Learn">
@@ -10,15 +10,20 @@
         <TableView fx:id="table">
             <columns>
                 <TableColumn prefWidth="60" text="№" fx:id="countColumn"/>
-                <TableColumn prefWidth="60" text="level" fx:id="levelColumn"/>
                 <TableColumn prefWidth="90" fx:id="checkBoxColumn"/>
-                <TableColumn prefWidth="800" text="question" fx:id="questionColumn"/>
+                <TableColumn prefWidth="900" text="question" fx:id="questionColumn"/>
             </columns>
         </TableView>
     </center>
 
     <bottom>
-        <Button text="check" onMouseClicked="#checkButtonListener"/>
+        <VBox>
+            <Pane minHeight="10"/>
+            <HBox alignment="CENTER">
+                <Button text="Check" onMouseClicked="#checkButtonListener"/>
+            </HBox>
+            <Pane minHeight="10"/>
+        </VBox>
     </bottom>
 
 

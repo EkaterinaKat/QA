@@ -1,26 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="controller.Edit"
-      prefHeight="400.0" prefWidth="600.0">
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.Edit"
+            prefHeight="400.0" prefWidth="600.0">
 
-    <TextArea fx:id="questionTextField" minHeight="200" wrapText="true"/>
-    <TextArea fx:id="answerTextField" minHeight="200" wrapText="true"/>
-    <HBox>
-        <Button text="Add SubQuestion" onMouseClicked="#addSubQuestionListener"/>
-        <VBox fx:id="subQuestionPane">
+    <center>
+        <VBox>
+            <TextArea fx:id="questionTextField" prefHeight="80" wrapText="true"/>
+            <Pane prefHeight="20"/>
+            <TextArea fx:id="answerTextField" prefHeight="400" wrapText="true"/>
+            <Pane prefHeight="20"/>
+            <HBox>
+                <Button text="Add SubQuestion" onMouseClicked="#addSubQuestionListener"/>
+                <VBox fx:id="subQuestionPane">
 
+                </VBox>
+            </HBox>
+            <Pane prefHeight="20"/>
+            <HBox>
+                <Label text="image: "/>
+                <TextField fx:id="imageTextField"/>
+            </HBox>
+            <Pane prefHeight="20"/>
+            <Button text="Done" onMouseClicked="#doneButtonListener"/>
         </VBox>
-    </HBox>
-    <HBox>
-        <Label text="image: "/>
-        <TextField fx:id="imageTextField"/>
-    </HBox>
-    <Button text="Done" onMouseClicked="#doneButtonListener"/>
+    </center>
+
+    <left>
+        <Pane minWidth="40"/>
+    </left>
+
+    <right>
+        <Pane minWidth="40"/>
+    </right>
+
+    <top>
+        <Pane minHeight="40"/>
+    </top>
+
+    <bottom>
+        <Pane minHeight="40"/>
+    </bottom>
 
 
-</VBox>
+</BorderPane>

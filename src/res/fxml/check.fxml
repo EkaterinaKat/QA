@@ -2,25 +2,41 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.learn.Check">
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.learn.Check">
 
 
-    <center>
-        <ScrollPane>
-            <VBox fx:id="mainVBox"/>
-        </ScrollPane>
-    </center>
+    <ScrollPane maxWidth="1360" minWidth="130">
+        <BorderPane>
+            <center>
+                <VBox fx:id="mainVBox"/>
+            </center>
+            <top>
+                <Pane minHeight="40"/>
+            </top>
 
-    <bottom>
-        <HBox>
+            <left>
+                <Pane minWidth="40"/>
+            </left>
+
+            <right>
+                <Pane minWidth="40"/>
+            </right>
+        </BorderPane>
+    </ScrollPane>
+
+
+    <VBox>
+        <Pane minHeight="10"/>
+        <HBox alignment="CENTER">
             <Button text="OK" onMouseClicked="#okButtonListener"/>
+            <Pane prefWidth="30"/>
             <Button text="Apply" fx:id="applyButton" onMouseClicked="#applyButtonListener"/>
         </HBox>
-    </bottom>
+        <Pane minHeight="10"/>
+    </VBox>
 
-</BorderPane>
+
+</VBox>

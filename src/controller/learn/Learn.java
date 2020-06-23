@@ -28,8 +28,6 @@ public class Learn {
     @FXML
     private TableColumn<SelectableQuestion, String> questionColumn;
     @FXML
-    private TableColumn<SelectableQuestion, Integer> levelColumn;
-    @FXML
     private TableView<SelectableQuestion> table;
 
     public static void start(LearnMode learnMode) {
@@ -48,7 +46,6 @@ public class Learn {
         countColumn.setCellValueFactory(column -> new ReadOnlyObjectWrapper<>(
                 table.getItems().indexOf(column.getValue()) + 1));
         questionColumn.setCellValueFactory(new PropertyValueFactory<>("question"));
-        levelColumn.setCellValueFactory(new PropertyValueFactory<>("level"));
         checkBoxColumn.setCellValueFactory(param -> {
             SelectableQuestion selectableQuestion = param.getValue();
             SimpleBooleanProperty booleanProperty = new SimpleBooleanProperty(selectableQuestion.isSelected());
@@ -127,10 +124,6 @@ public class Learn {
         public SelectableQuestion(QA qa) {
             this.qa = qa;
             selected = false;
-        }
-
-        public Integer getLevel() {
-            return qa.getLevel();
         }
 
         public void setSelected(boolean selected) {

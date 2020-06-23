@@ -4,16 +4,28 @@
             xmlns:fx="http://javafx.com/fxml">
 
     <top>
-        <HBox>
-            <Button text="add QA" onMouseClicked="#addButtonListener"/>
-            <Button text="learn 0/1->2" onMouseClicked="#learn012ButtonListener"/>
-            <Button text="learn 2->3" onMouseClicked="#learn23ButtonListener"/>
-            <Button text="0/1 level" fx:id="level_01_button" onMouseClicked="#level01ButtonListener"/>
-            <Button text="2 level" fx:id="level_2_button" onMouseClicked="#level2ButtonListener"/>
-            <Button text="3 level" fx:id="level_3_button" onMouseClicked="#level3ButtonListener"/>
-            <Button text="Sections" fx:id="sectionsButton" onMouseClicked="#sectionsButtonListener"/>
-            <TextField fx:id="searchField"/>
-        </HBox>
+        <VBox>
+            <Pane minHeight="20"/>
+            <HBox>
+                <Pane minWidth="30"/>
+                <Button text="add QA" onMouseClicked="#addButtonListener"/>
+                <Pane minWidth="40"/>
+                <Button text="0/1 level" fx:id="level_01_button" onMouseClicked="#level01ButtonListener"/>
+                <Pane minWidth="40"/>
+                <Button text="2 level" fx:id="level_2_button" onMouseClicked="#level2ButtonListener"/>
+                <Pane minWidth="40"/>
+                <Button text="3 level" fx:id="level_3_button" onMouseClicked="#level3ButtonListener"/>
+                <Pane minWidth="40"/>
+                <Button text="Sections" fx:id="sectionsButton" onMouseClicked="#sectionsButtonListener"/>
+                <Pane minWidth="40"/>
+                <Button text="learn 0/1->2" onMouseClicked="#learn012ButtonListener"/>
+                <Pane minWidth="40"/>
+                <Button text="learn 2->3" onMouseClicked="#learn23ButtonListener"/>
+                <Pane minWidth="40"/>
+                <TextField fx:id="searchField"/>
+            </HBox>
+            <Pane minHeight="20"/>
+        </VBox>
     </top>
 
     <bottom>

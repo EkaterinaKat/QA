@@ -57,13 +57,13 @@ public class Check {
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setMaxHeight(400);
         VBox vBox = new VBox();
-        Label label = new Label(qa.getAnswer());
-        label.setMaxWidth(CHECK_WIDTH - 80);
-        scrollPane.setMaxWidth(CHECK_WIDTH - 40);
-        scrollPane.setMinWidth(CHECK_WIDTH - 40);
-        label.wrapTextProperty().setValue(true);
+        Label answerLabel = new Label(qa.getAnswer());
+        answerLabel.setMaxWidth(CHECK_WIDTH - 160);
+        scrollPane.setMaxWidth(CHECK_WIDTH - 140);
+        scrollPane.setMinWidth(CHECK_WIDTH - 140);
+        answerLabel.wrapTextProperty().setValue(true);
         ImageView imageView = new ImageView(new Image(IMAGES_PATH + qa.getImage()));
-        vBox.getChildren().addAll(label, imageView);
+        vBox.getChildren().addAll(answerLabel, imageView);
         scrollPane.setContent(vBox);
         return scrollPane;
     }
