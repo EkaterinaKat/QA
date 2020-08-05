@@ -3,6 +3,7 @@ package utils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -58,6 +59,7 @@ public class WindowCreator {
 
     private Stage getStage(String fxmlName, int width, int height) {
         Stage stage = new Stage();
+        stage.getIcons().add(new Image("file:C:\\Users\\814571\\Desktop\\Code\\QA\\src\\res\\icon\\icon.png"));
         stage.setTitle(TITLE);
         stage.setMinHeight(height);
         stage.setMaxHeight(height);

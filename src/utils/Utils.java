@@ -41,6 +41,8 @@ public class Utils {
     public static VBox getVBoxDescOfQuestion(QA qa) {
         VBox vBox = new VBox();
         Label qLabel = new Label(String.format(" %s (%d)", qa.getQuestion(), qa.getLevel()));
+        qLabel.setWrapText(true);
+        qLabel.setMaxWidth(1000);
         qLabel.setStyle(getMainQuestionStyle());
         vBox.getChildren().add(qLabel);
         List<SubQuestion> subQuestions = JDBC.getInstance().getSubQuestions(qa);

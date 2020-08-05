@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import model.QA;
+import utils.DateManager;
 import utils.Utils;
 
 import java.util.List;
@@ -15,6 +16,7 @@ class Helper {
 
     static void fillGridPaneWithPlainQAs(List<QA> qas, GridPane table) {
         table.getChildren().clear();
+        DateManager.getInstance().sortByDate(qas);
         int row = 0;
         for (QA qa : qas) {
             int numOfQinList = row + 1;
@@ -27,6 +29,7 @@ class Helper {
 
     static void fillGridPaneWithQAsAndDates(List<QA> qas, GridPane table) {
         table.getChildren().clear();
+        DateManager.getInstance().sortByDate(qas);
         int row = 0;
         for (QA qa : qas) {
             int numOfQinList = row + 1;
@@ -39,6 +42,7 @@ class Helper {
 
     static void fillGridPainWithQAsAndSubQAs(List<QA> qas, GridPane table) {
         table.getChildren().clear();
+        DateManager.getInstance().sortByDate(qas);
         int row = 0;
         for (QA qa : qas) {
             int numOfQinList = row + 1;

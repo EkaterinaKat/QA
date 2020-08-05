@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Adding implements SectionCreationAware {
-    private List<TextField> subQueTextFields;
+    private List<TextField> subQueTextFields = new ArrayList<>();
     @FXML
     private VBox subQuestionPane;
     @FXML
@@ -35,7 +35,6 @@ public class Adding implements SectionCreationAware {
 
     @FXML
     private void initialize() {
-        subQueTextFields = new ArrayList<>();
         tuneSectionBox();
     }
 
@@ -81,6 +80,7 @@ public class Adding implements SectionCreationAware {
         answerTextField.clear();
         imageTextField.clear();
         subQuestionPane.getChildren().clear();
+        subQueTextFields = new ArrayList<>();
     }
 
     @Override
